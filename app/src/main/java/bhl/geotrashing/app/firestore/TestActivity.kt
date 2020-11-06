@@ -15,7 +15,7 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
 
-        val dataBase = DataBase()
+        val dataBase = DataBase(this)
         val rnd = Random()
 
         val trashLiveData = dataBase.getAllTrash()
@@ -23,15 +23,12 @@ class TestActivity : AppCompatActivity() {
             Log.d(TAG,"Data change in ${it}")
         })
 
-        test_button.setOnClickListener {
-
-            dataBase.uploadTrash(
-                LatLng(1.0,1.0),
-                rnd.nextInt(100),
-                rnd.nextInt(100),
-                "Smieci "+rnd.nextInt(100))
-
-        }
+//        test_button.setOnClickListener {
+//
+//            dataBase.uploadTrash(
+//                LatLng(1.0,1.0),"description",
+//
+//        }
 
 
     }
