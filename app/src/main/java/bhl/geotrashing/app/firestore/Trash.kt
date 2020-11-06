@@ -11,7 +11,8 @@ data class Trash(
     var creatorID: String = "brak",
     var description: String = "brak",
     var collected: Boolean = false,
-    var timestamp: Timestamp = Timestamp.now()
+    var timestamp: Timestamp = Timestamp.now(),
+    var photoID: String = "brak"
 
 )
 
