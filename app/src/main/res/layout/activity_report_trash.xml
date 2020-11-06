@@ -10,20 +10,26 @@
         android:id="@+id/btnTakePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="568dp"
         android:text="Take Picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="234dp"
-        android:layout_height="295dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+    <fragment
+        android:id="@+id/report_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        tools:context=".CleanTrashActivity"
+        tools:layout_editor_absoluteX="-42dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="205dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
