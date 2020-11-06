@@ -3,6 +3,7 @@ package bhl.geotrashing.app.firestore
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.text.BoringLayout
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
@@ -30,16 +31,14 @@ class DataBase(val contex: Context) {
     ) {
 
         val locationGeoPoint = GeoPoint(location.latitude, location.longitude)
-        // Create a storage reference from our app
         val storageRef = storage.reference
-        // Create a reference to "mountains.jpg"
 
-        val timestamp = Timestamp.now()
-        val trash = Trash(locationGeoPoint, user?.uid!!, description, false, timestamp)
-        db.collection("trash").add(trash)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                val pictureRef = storageRef.child("trash/" + trash.photoID + ".jpg")
+        val ref = db.collection("trash").document()
+        val trash = Trash(locationGeoPoint, user?.uid!!, description, ref.id)
+        ref.set(trash)
+            .addOnSuccessListener {
+                Log.d(TAG, "DocumentSnapshot added with ID: ${ref.id}")
+                val pictureRef = storageRef.child("trash/" + ref.id + ".jpg")
                 val baos = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                 val data = baos.toByteArray()
@@ -69,85 +68,81 @@ class DataBase(val contex: Context) {
             }
     }
 
-    fun getAllTrash(): MutableLiveData<ArrayList<Trash>>  {
+    fun getAllTrash(collected:Boolean, confirmed:Boolean): MutableLiveData<ArrayList<Trash>>  {
         val liveDataTrashList: MutableLiveData<ArrayList<Trash>> = MutableLiveData()
-        Log.d(TAG, "getAllSubjecList()")
+        if(!collected && confirmed){
+            Log.w(TAG, "ERROR ERROR ERROR ERROR ERROR ERROR")
+        }
         db.collection("trash")
-            .whereEqualTo("collected", false).addSnapshotListener { value, e ->
+            .whereEqualTo("collected", collected).whereEqualTo("confirmed",confirmed).addSnapshotListener { value, e ->
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
                     return@addSnapshotListener
                 }
                 val trashList = ArrayList<Trash>()
                 for (doc in value!!) {
-
                     doc.toObject(Trash::class.java).let {
                         trashList.add(it)
                     }
-
                 }
-                Log.d(TAG, "Current trashs: $trashList")
+                Log.d(TAG, "Current trashes: $trashList")
                 liveDataTrashList.value=trashList
             }
         return liveDataTrashList
     }
 
-    fun getTrashPhoto(trash: Trash): MutableLiveData<ByteArray> {
+    fun getTrashPhoto(trash: Trash,collected: Boolean = false): MutableLiveData<ByteArray> {
         val liveByteArray: MutableLiveData<ByteArray> = MutableLiveData()
         val storageRef = storage.reference
-        var pictureRef = storageRef.child("trash/" + trash.photoID + ".jpg")
+        var pictureRef = storageRef.child("trash/" + trash.ID + ".jpg")
+        if (collected) pictureRef = storageRef.child("collected_trash/" + trash.ID + ".jpg")
         val ONE_MEGABYTE: Long = 1024 * 1024
         pictureRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                liveByteArray.value = it
-            // Data for "images/island.jpg" is returned, use this as needed
+            liveByteArray.value = it
         }.addOnFailureListener {
             // Handle any errors
         }
         return liveByteArray
     }
 
+    fun uploadTrashCollecting(bitmap: Bitmap, trash: Trash){
+        val storageRef = storage.reference
+        trash.collected=true
+        db.collection("trash").document(trash.ID).set(trash)
+            .addOnSuccessListener {
+                Log.d(TAG, "DocumentSnapshot added with ID: ${trash.ID}")
+                val pictureRef = storageRef.child("collected_trash/" + trash.ID + ".jpg")
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                var uploadTask = pictureRef.putBytes(data)
+                uploadTask.addOnFailureListener {
+                    // Handle unsuccessful uploads
+                }.addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "Picture send")
+                    val toast = Toast.makeText(
+                        this.contex,
+                        "Poprawnie dodano zgłoszenie",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast.show()
+                }.addOnFailureListener { e ->
+                    Log.w(TAG, "Error sending picture", e)
+                    val toast = Toast.makeText(
+                        this.contex,
+                        "Niepoprawnie dodano zgłoszenie",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast.show()
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }
+
+    }
 
 
-//    Log.d("Data change", " db.collection(\"list\").whereEqualTo(\"teacherID\",teacherID")
-//    var allAttendanceList = ArrayList<AttendenceList>()
-//    liveDataAllAttendenceList.value=allAttendanceList
-//    for (doc in documents) {
-//        var newAttendenceList = doc.toObject(AttendenceList::class.java)
-//        doc.reference.collection("attendence").addSnapshotListener{attendenceList, e ->
-//            Log.d("Data change", " doc.reference.collection(\"attendence\").")
-//            if (e != null) {
-//                Log.w(TAG, "Listen failed.", e)
-//                return@addSnapshotListener
-//            }
-//            newAttendenceList.attendence=ArrayList()
-//            if (attendenceList != null) {
-//                for(doc2 in attendenceList){
-//
-//                    newAttendenceList.attendence.add(doc2.toObject(Attendence::class.java))
-//                    Log.d(TAG,newAttendenceList.attendence.toString()+" "+doc2)
-//                }
-//            }
-//
-//            allAttendanceList.removeIf{ it.code==newAttendenceList.code }
-//            allAttendanceList.add(newAttendenceList)
-//            liveDataAllAttendenceList.value=allAttendanceList
-//        }
-
-
-//    fun getAllTrash(){
-//
-//        db.collection("trash")
-//            .whereEqualTo("collected", false)
-//            .get()
-//            .addOnSuccessListener { documents ->
-//                for (document in documents) {
-//                    Log.d(TAG, "${document.id} => ${document.data}")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w(TAG, "Error getting documents: ", exception)
-//            }
-//    }
 
 
 
