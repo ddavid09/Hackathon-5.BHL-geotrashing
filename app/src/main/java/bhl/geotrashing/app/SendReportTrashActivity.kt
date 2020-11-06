@@ -18,9 +18,10 @@ class SendReportTrashActivity : AppCompatActivity() {
         val decodedTakenImage = BitmapFactory.decodeFile(takenImage)
         val db = DataBase(this)
         activity_send_report_trash_imageViewId.setImageBitmap(decodedTakenImage)
+        val description = activity_send_report_trash_descriptionId.text
 
         activity_send_report_trash_btnSendId.setOnClickListener {
-            db.uploadTrash(LatLng(0.0,0.0),"description",decodedTakenImage)
+            db.uploadTrash(LatLng(0.0,0.0),description.toString() ,decodedTakenImage)
         }
     }
 
