@@ -41,6 +41,8 @@ class ReportTrashActivity : AppCompatActivity(), LocationListener, OnMapReadyCal
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationManager: LocationManager
     private lateinit var lastLocation: Location
+    private lateinit var sendLocation: LatLng;
+    var imageCanBeSend: Boolean = false;
     private val locationPermissionCode = 2
 
     companion object { private const val LOCATION_PERMISSION_REQUEST_CODE = 1 }
@@ -52,6 +54,7 @@ class ReportTrashActivity : AppCompatActivity(), LocationListener, OnMapReadyCal
         mapFragment.getMapAsync(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
+        btnTakePicture.isClickable = false;
 
 
         /*
@@ -61,22 +64,29 @@ class ReportTrashActivity : AppCompatActivity(), LocationListener, OnMapReadyCal
         sendReportTrashIntent = Intent(this, SendReportTrashActivity::class.java)
 
         btnTakePicture.setOnClickListener {
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            photoFile = getPhotoFile(FILE_NAME)
+            if( imageCanBeSend == true)
+            {
+                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                photoFile = getPhotoFile(FILE_NAME)
 
-            //API > 24
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile)
-            val fileprovider = FileProvider.getUriForFile(
-                this,
-                "com.example.fileprovider",
-                photoFile
-            )
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileprovider)
+                //API > 24
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile)
+                val fileprovider = FileProvider.getUriForFile(
+                    this,
+                    "com.example.fileprovider",
+                    photoFile
+                )
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileprovider)
 
-            if (takePictureIntent.resolveActivity(this.packageManager) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_CODE)
-            } else {
-                Toast.makeText(this, "Nie mozna otworzyc aparatu", Toast.LENGTH_SHORT).show()
+                if (takePictureIntent.resolveActivity(this.packageManager) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_CODE)
+                } else {
+                    Toast.makeText(this, "Nie mozna otworzyc aparatu", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else
+            {
+                Toast.makeText(this, "Czekaj na pobranie aktualnej lokalizacji", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -109,22 +119,7 @@ class ReportTrashActivity : AppCompatActivity(), LocationListener, OnMapReadyCal
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
     }
-    @SuppressLint("SetTextI18n")
-    override fun onLocationChanged(location: Location) {
-        println("Latitude: " + location.latitude + "\nLongitude: " + location.longitude)
-    }
 
-    override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onProviderEnabled(p0: String?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onProviderDisabled(p0: String?) {
-        TODO("Not yet implemented")
-    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == locationPermissionCode) {
@@ -150,12 +145,32 @@ class ReportTrashActivity : AppCompatActivity(), LocationListener, OnMapReadyCal
             //val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
 
             sendReportTrashIntent.putExtra("path", path)
+            sendReportTrashIntent.putExtra("location", sendLocation)
             startActivity(this.sendReportTrashIntent)
         }
         else{
             super.onActivityResult(requestCode, resultCode, data)
         }
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onLocationChanged(location: Location) {
+        imageCanBeSend = true
+        sendLocation = LatLng(location.latitude, location.longitude)
+        println("Latitude: " + location.latitude + "\nLongitude: " + location.longitude)
+    }
+
+    override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onProviderEnabled(p0: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onProviderDisabled(p0: String?) {
+        TODO("Not yet implemented")
     }
 
 

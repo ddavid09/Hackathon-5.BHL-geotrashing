@@ -26,8 +26,8 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="408dp"
-        android:layout_height="147dp"
+        android:layout_width="335dp"
+        android:layout_height="144dp"
         app:layout_constraintBottom_toTopOf="@+id/activity_send_report_trash_btnSendId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
@@ -38,7 +38,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/activity_send_report_trash_descriptionId"
             android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:layout_height="match_parent"
             android:hint="@string/hint" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
