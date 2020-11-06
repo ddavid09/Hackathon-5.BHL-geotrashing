@@ -6,6 +6,6 @@ import android.os.Bundle
 class ReportTrashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_clean_trash)
+        setContentView(R.layout.activity_report_trash)
     }
 }
