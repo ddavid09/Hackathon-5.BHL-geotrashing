@@ -2,4 +2,6 @@
     <string name="app_name">geotrashing</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">BHL-GEOTRASHING</string>
+    <string name="hint">Description</string>
+    <string name="activity_send_report_trash_btnSend">Send Form</string>
 </resources>

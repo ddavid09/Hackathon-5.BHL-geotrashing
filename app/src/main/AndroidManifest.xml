@@ -7,7 +7,7 @@
          location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,20 +17,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Geotrashing">
 
+
         <provider
-            android:authorities="com.example.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/fileprovider"/>
+                android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".VerifyTrashActivity"></activity>
+        <activity android:name=".VerifyTrashActivity" />
         <activity android:name=".RankingActivity" />
         <activity android:name=".ReportTrashActivity" />
         <activity android:name=".CleanTrashActivity" />
+        <activity android:name=".SendReportTrashActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -48,6 +50,7 @@
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
