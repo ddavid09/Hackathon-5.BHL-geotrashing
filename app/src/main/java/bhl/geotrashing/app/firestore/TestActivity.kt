@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import bhl.geotrashing.app.R
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_test.*
+import java.util.*
 
 class TestActivity : AppCompatActivity() {
     val TAG = "TestActivity"
@@ -15,40 +16,21 @@ class TestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_test)
 
         val dataBase = DataBase()
+        val rnd = Random()
+
+        val trashLiveData = dataBase.getAllTrash()
+        trashLiveData.observe(this, Observer {
+            Log.d(TAG,"Data change in ${it}")
+        })
 
         test_button.setOnClickListener {
 
             dataBase.uploadTrash(
                 LatLng(1.0,1.0),
-                1,
-                1,
-                "Smieci 1")
-            dataBase.uploadTrash(
-                LatLng(1.0,1.0),
-                1,
-                1,
-                "Smieci 2")
-            dataBase.uploadTrash(
-                LatLng(1.0,1.0),
-                3,
-                4,
-                "Smieci 3")
-            dataBase.uploadTrash(
-                LatLng(1.0,1.0),
-                1,
-                1,
-                "Smieci 4",true)
-            dataBase.uploadTrash(
-                LatLng(1.0,1.0),
-                2,
-                1,
-                "Smieci 5")
+                rnd.nextInt(100),
+                rnd.nextInt(100),
+                "Smieci "+rnd.nextInt(100))
 
-            val trashLiveData = dataBase.getAllTrash()
-
-            trashLiveData.observe(this, Observer {
-                Log.d(TAG,"Data change in ${it}")
-            })
         }
 
 

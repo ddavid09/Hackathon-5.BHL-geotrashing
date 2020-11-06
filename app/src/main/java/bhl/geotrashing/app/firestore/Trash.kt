@@ -1,8 +1,9 @@
 package bhl.geotrashing.app.firestore
 
-import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.IgnoreExtraProperties
+
 
 @IgnoreExtraProperties
 data class Trash(
@@ -10,7 +11,8 @@ data class Trash(
     var creatorID: Int = 0,
     var pictureID: Int = 0,
     var description: String = "brak",
-    var collected: Boolean = false
+    var collected: Boolean = false,
+    var timestamp: Timestamp = Timestamp.now()
 
 )
 
