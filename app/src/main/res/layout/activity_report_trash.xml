@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".CleanTrashActivity"
+        tools:context=".cleantrashactivities.CleanTrashActivity"
         tools:layout_editor_absoluteX="-42dp" />
 
     <androidx.constraintlayout.widget.Guideline

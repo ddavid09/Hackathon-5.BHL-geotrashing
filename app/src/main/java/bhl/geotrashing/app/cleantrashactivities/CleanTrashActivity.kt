@@ -1,7 +1,8 @@
-package bhl.geotrashing.app
+package bhl.geotrashing.app.cleantrashactivities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import bhl.geotrashing.app.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
