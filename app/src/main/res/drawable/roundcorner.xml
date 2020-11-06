@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape  android:shape="rectangle"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:elevation="15px">
+
+            <solid android:color="#d8d8d8" />
+            <corners android:radius="7dp" />
+
+        </shape>
+    </item>
+
+</shape>

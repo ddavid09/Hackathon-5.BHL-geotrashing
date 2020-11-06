@@ -4,53 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/ic_background">
 
-    <Button
-        android:id="@+id/reportTrashBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:onClick="startReportTrashActivity"
-        android:text="Report"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/cleanTrashBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:text="Clean"
-        android:onClick="startCleanTrashActivity"
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="374dp"
+        android:layout_height="142dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginRight="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_geotrashing_logo" />
 
-    <Button
-        android:id="@+id/verifyTrashBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="416dp"
-        android:onClick="startVerifyTrashActivity"
-        android:text="Verify"
+    <RelativeLayout
+        android:layout_width="353dp"
+        android:layout_height="346dp"
+        android:layout_marginBottom="85dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <Button
-        android:id="@+id/rankingBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="304dp"
-        android:onClick="startRankingActivity"
-        android:text="Ranking"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/reportTrashBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundcorner"
+            android:onClick="startReportTrashActivity"
+            app:srcCompat="@drawable/ic_report_btn" />
+
+        <ImageButton
+            android:id="@+id/cleanTrashBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:onClick="startCleanTrashActivity"
+            android:background="@drawable/roundcorner"
+            app:srcCompat="@drawable/ic_clean_btn" />
+
+        <ImageButton
+            android:id="@+id/verifyTrashBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:onClick="startVerifyTrashActivity"
+            android:background="@drawable/roundcorner"
+            app:srcCompat="@drawable/ic_verify_btn" />
+
+        <ImageButton
+            android:id="@+id/rankingBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:onClick="startRankingActivity"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/roundcorner"
+            app:srcCompat="@drawable/ic_ranking_btn" />
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
