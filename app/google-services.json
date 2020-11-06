@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "392363521278",
+    "firebase_url": "https://bhl-geotrashing.firebaseio.com",
+    "project_id": "bhl-geotrashing",
+    "storage_bucket": "bhl-geotrashing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392363521278:android:42ba7e149d474cf992a1af",
+        "android_client_info": {
+          "package_name": "bhl.geotrashing.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392363521278-nidpubp34e6a4iuuen98kg3tq61qi2i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHqv5B5rytf_TJKhs06dsjGP8eWHMG62I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392363521278-nidpubp34e6a4iuuen98kg3tq61qi2i5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
