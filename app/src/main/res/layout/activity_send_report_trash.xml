@@ -7,7 +7,7 @@
     tools:context=".SendReportTrashActivity">
 
     <ImageView
-        android:id="@+id/activity_send_report_trash_imageView"
+        android:id="@+id/activity_send_report_trash_imageViewId"
         android:layout_width="402dp"
         android:layout_height="317dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,7 +16,7 @@
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <Button
-        android:id="@+id/btnSend"
+        android:id="@+id/activity_send_report_trash_btnSendId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,14 +28,15 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="408dp"
         android:layout_height="147dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSend"
+        app:layout_constraintBottom_toTopOf="@+id/activity_send_report_trash_btnSendId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_send_report_trash_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/activity_send_report_trash_imageViewId"
         app:layout_constraintVertical_bias="0.132">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/activity_send_report_trash_descriptionId"
             android:layout_width="match_parent"
             android:layout_height="135dp"
             android:hint="@string/hint" />
