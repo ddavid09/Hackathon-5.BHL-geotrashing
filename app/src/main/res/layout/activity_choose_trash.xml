@@ -9,7 +9,10 @@
     <ImageView
         android:id="@+id/ChooseTrashActivityImageViewId"
         android:layout_width="match_parent"
-        android:layout_height="352dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="350dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -17,21 +20,30 @@
     <TextView
         android:id="@+id/ChooseTrashActivityTextViewId"
         android:layout_width="match_parent"
-        android:layout_height="189dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="150dp"
+        android:textAlignment="center"
+        android:gravity="center"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChooseTrashActivityImageViewId" />
+        app:layout_constraintTop_toBottomOf="@+id/ChooseTrashActivityImageViewId"
+        />
 
     <Button
         android:id="@+id/ChooseTrashActivityButtonId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="POSPRZĄTAŁEM"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="524dp"
+        android:drawableLeft="@drawable/ic_sweeping"
+        android:text="Sprzątam tutaj"
+        android:textColor="#353535"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChooseTrashActivityTextViewId" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
