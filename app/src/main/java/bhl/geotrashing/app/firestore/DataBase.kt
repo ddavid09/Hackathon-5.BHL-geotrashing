@@ -233,6 +233,7 @@ class DataBase(val contex: Context) {
             for (doc in documents!!) {
                 doc.toObject(User::class.java).let {
                     ranking.value?.set(it.userID, it)
+
                     genPointsFor(it,ranking)
                 }
             }
