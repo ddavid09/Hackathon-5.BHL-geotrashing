@@ -15,8 +15,6 @@ data class Trash(
     var confirmed: Boolean = false,
     var collectorID: String = "bralk",
     var timestamp: Timestamp = Timestamp.now()
-
-
 )
 
 
