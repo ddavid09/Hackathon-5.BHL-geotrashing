@@ -192,22 +192,23 @@ class DataBase(val contex: Context) {
     fun setUserNickname(nickname: String){
         user?.uid?.let {
             val userData = User(it,nickname)
-            db.collection("users").document(it).set(user)
+            db.collection("users").document(it)
+                .set(userData)
                 .addOnSuccessListener {
                     Log.d(TAG, "DocumentSnapshot added with ID: ${it}")
-                    Toast.makeText(
-                        this.contex,
-                        "Poprawnie dodano nick użytkownika",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        this.contex,
+//                        "Poprawnie dodano nick użytkownika",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 }
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error adding document", e)
-                    Toast.makeText(
-                        this.contex,
-                        "Błąd w dodawaniu nicka użytkownika",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        this.contex,
+//                        "Błąd w dodawaniu nicka użytkownika",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 }
         }
     }
@@ -219,11 +220,11 @@ class DataBase(val contex: Context) {
             .whereEqualTo("confirmed",true)
             .addSnapshotListener{
                     value, error ->
-                mutableLiveData.value!![user.userID]!!.points++
+                mutableLiveData.value!![user.userID]!!.points+=100
             }
     }
 
-    fun  getRanking(): MutableLiveData<MutableMap<String, User>> {
+    fun getRanking(): MutableLiveData<MutableMap<String, User>> {
         val ranking:MutableLiveData<MutableMap<String,User>> = MutableLiveData<MutableMap<String,User>>()
         db.collection("user").addSnapshotListener { documents, e ->
             if (e != null) {
