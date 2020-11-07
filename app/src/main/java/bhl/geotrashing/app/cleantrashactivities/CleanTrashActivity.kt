@@ -45,13 +45,11 @@ class CleanTrashActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         btnChoseMarker.setOnClickListener {
             if(markerChosen)
             {
-                var trash: Trash? = null
                 database.getTrashFromLatLng(currentMarker!!.position).observe(this, Observer {
-                    trash = it
+                    intentToNextActivity.putExtra("long", it?.locationGeoPoint?.longitude)
+                    intentToNextActivity.putExtra("lat", it?.locationGeoPoint?.latitude)
+                    startActivity(intentToNextActivity)
                 })
-                intentToNextActivity.putExtra("long", trash?.locationGeoPoint?.longitude)
-                intentToNextActivity.putExtra("lat", trash?.locationGeoPoint?.latitude)
-                startActivity(intentToNextActivity)
             }
             else
             {
