@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import bhl.geotrashing.app.R
 import bhl.geotrashing.app.firestore.DataBase
+import bhl.geotrashing.app.firestore.Trash
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
