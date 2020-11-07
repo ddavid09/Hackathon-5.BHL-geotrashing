@@ -32,19 +32,35 @@ class ConfirmTrashActivity : AppCompatActivity() {
     lateinit var prizeTrashActivity: Intent
     lateinit var location: LatLng
     lateinit var path : String
+    lateinit var trash: Trash
     var btnClickable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_trash)
         prizeTrashActivity = Intent(this, PrizeTrashActivity::class.java)
-        val db = DataBase(this)
 
         val intent : Intent = getIntent()
-        val trashId = intent.getStringExtra("trashId")
-        val trash : Trash = Trash(ID = trashId)
-        val description = trash.description
-        location = LatLng(trash.locationGeoPoint.latitude,trash.locationGeoPoint.longitude)
+        val locationLong = intent.getDoubleExtra("long", 0.0)
+        val locationLat = intent.getDoubleExtra("lat", 0.0)
+        val db = DataBase(this)
+        val location = com.google.android.gms.maps.model.LatLng(locationLat, locationLong)
+        Log.d("ChooseTrashActivity", location.toString())
+
+        val MLtrash = db.getTrashFromLatLng(location)
+        /*val LDpicture = DataBase(this).getTrashPhoto(trash)
+        ChooseTrashActivityTextViewId.setText(trash.description)*/
+
+        MLtrash.observe(this, Observer {
+            //Log.d("ChooseTrashActivity", "inObserve")
+            if (it != null) {
+                trash = it
+            } else{
+                //Log.d("ChooseTrashActivity", "out")
+                Toast.makeText(this, "Nie można pobrać informacji o śmieciach", Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
 
         ConfirmTrashActivityButtonTakePictureId.setOnClickListener {
@@ -64,12 +80,13 @@ class ConfirmTrashActivity : AppCompatActivity() {
 
 
         ConfirmTrashActivityButtonConfrimId.setOnClickListener {
-            if (btnClickable){
+            if (btnClickable && trash.ID!="brak"){
 
-                val decodedTakenImage = BitmapFactory.decodeFile(path)
-                db.uploadTrash(location,description.toString() ,decodedTakenImage)
-                prizeTrashActivity.putExtra("trashId", trashId)
+                val decodedTakenImage = BitmapFactory.decodeFile(path) // new photo
+                db.uploadTrashCollecting(decodedTakenImage,trash)
                 startActivity(this.prizeTrashActivity)
+            }else if (trash.ID=="brak"){
+                Toast.makeText(this, "Baza danych się ładuje!", Toast.LENGTH_SHORT).show()
             }else
             {
                 Toast.makeText(this, "Najpierw zrób zdjęcie!", Toast.LENGTH_SHORT).show()
