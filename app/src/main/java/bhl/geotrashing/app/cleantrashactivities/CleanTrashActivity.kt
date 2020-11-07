@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import bhl.geotrashing.app.R
 import bhl.geotrashing.app.firestore.DataBase
+import bhl.geotrashing.app.firestore.Trash
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -44,6 +45,12 @@ class CleanTrashActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         btnChoseMarker.setOnClickListener {
             if(markerChosen)
             {
+                var trash: Trash? = null
+                database.getTrashFromLatLng(currentMarker!!.position).observe(this, Observer {
+                    trash = it
+                })
+                intentToNextActivity.putExtra("long", trash?.locationGeoPoint?.longitude)
+                intentToNextActivity.putExtra("lat", trash?.locationGeoPoint?.latitude)
                 startActivity(intentToNextActivity)
             }
             else

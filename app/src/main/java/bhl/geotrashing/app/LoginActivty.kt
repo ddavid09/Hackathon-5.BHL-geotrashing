@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import bhl.geotrashing.app.firestore.DataBase
 import com.google.firebase.auth.FirebaseAuth
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
@@ -54,6 +55,8 @@ class LoginActivty : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
                 val user = FirebaseAuth.getInstance().currentUser
+                val email = user?.email
+                DataBase(this).setUserNickname(email!!.substring(0,email.indexOf("@")))
                 startActivity(this.mainMenuIntent)
                 // ...
             } else {
