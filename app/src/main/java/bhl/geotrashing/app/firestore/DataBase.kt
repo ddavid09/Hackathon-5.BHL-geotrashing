@@ -192,7 +192,7 @@ class DataBase(val contex: Context) {
     fun setUserNickname(nickname: String){
         user?.uid?.let {
             val userData = User(it,nickname)
-            db.collection("users").document(it).set(user)
+            db.collection("users").document(it).set(userData)
                 .addOnSuccessListener {
                     Log.d(TAG, "DocumentSnapshot added with ID: ${it}")
                     Toast.makeText(
