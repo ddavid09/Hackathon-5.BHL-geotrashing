@@ -6,44 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".cleantrashactivities.PrizeTrashActivity">
 
-    <ImageView
-        android:id="@+id/prizeTrashActivityImageViewId"
-        android:layout_width="316dp"
-        android:layout_height="188dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/prizeTrashActivityTextViewId"
-        android:layout_width="351dp"
-        android:layout_height="198dp"
-        android:layout_marginTop="32dp"
-        android:text="JESTEŚ SUPER"
-        app:layout_constraintTop_toBottomOf="@+id/prizeTrashActivityImageViewId"
-        tools:layout_editor_absoluteX="30dp" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_send_bar"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:title="Sprzątanie" />
 
-    <TextView
-        android:id="@+id/prizeTrashActivityTextView2Id"
-        android:layout_width="294dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="60dp"
-        android:text="Punkty dostaniesz po weryfikacji"
-        app:layout_constraintTop_toBottomOf="@+id/prizeTrashActivityTextViewId"
-        tools:layout_editor_absoluteX="62dp" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <Button
-        android:id="@+id/prizeTrashActivitybutton2Id"
-        android:layout_width="302dp"
-        android:layout_height="69dp"
-        android:text="HOME"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prizeTrashActivityTextView2Id"
-        app:layout_constraintVertical_bias="0.235" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/prizeTrashActivityImageViewId"
+            android:layout_width="match_parent"
+            android:layout_height="364dp"
+            android:src="@drawable/ic_trophy"
+            android:layout_margin="35dp"/>
+
+        <TextView
+            android:id="@+id/prizeTrashActivityTextView2Id"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="30dp"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:text="Ziemia jest Ci wdzięczna! Punkty zostaną naliczone po dokonaniu weryfikacji" />
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
