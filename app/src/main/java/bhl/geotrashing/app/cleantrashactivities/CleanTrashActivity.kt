@@ -7,6 +7,7 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
@@ -50,6 +51,7 @@ class CleanTrashActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
                     intentToNextActivity.putExtra("lat", it?.locationGeoPoint?.latitude)
                     startActivity(intentToNextActivity)
                 })
+                btnChoseMarker.visibility = View.INVISIBLE
             }
             else
             {
@@ -94,5 +96,10 @@ class CleanTrashActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17f))
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        btnChoseMarker.visibility = View.VISIBLE
     }
 }

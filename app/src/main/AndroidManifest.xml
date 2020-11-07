@@ -20,7 +20,8 @@
         <activity android:name=".LoadingActivity"></activity>
         <activity android:name=".cleantrashactivities.PrizeTrashActivity" />
         <activity android:name=".cleantrashactivities.ConfirmTrashActivity" />
-        <activity android:name=".cleantrashactivities.ChooseTrashActivity" />
+        <activity android:name=".cleantrashactivities.ChooseTrashActivity"
+            android:theme="@style/Theme.AppCompat.Translucent"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
