@@ -22,7 +22,6 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-
 class DataBase(val contex: Context) {
     val db = Firebase.firestore
     val user = FirebaseAuth.getInstance().currentUser
