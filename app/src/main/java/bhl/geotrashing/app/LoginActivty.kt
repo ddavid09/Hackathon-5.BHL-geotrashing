@@ -18,6 +18,7 @@ class LoginActivty : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_activty)
+        title = "Zaloguj"
         mainMenuIntent = Intent(this, MainActivity::class.java)
 
         createSignInIntent()
@@ -40,6 +41,8 @@ class LoginActivty : AppCompatActivity() {
                 .build(),
             RC_SIGN_IN)
         // [END auth_fui_create_intent]
+
+        this.actionBar?.title = "Zaloguj"
     }
 
     // [START auth_fui_result]

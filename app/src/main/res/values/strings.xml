@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">geotrashing</string>
+    <string name="app_name">Dołącz do Geotrashing</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">BHL-GEOTRASHING</string>
     <string name="hint">Description</string>
