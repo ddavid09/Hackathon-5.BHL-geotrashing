@@ -13,6 +13,7 @@ data class Trash(
     var ID: String = "brak",
     var collected: Boolean = false,
     var confirmed: Boolean = false,
+    var collectorID: String = "bralk",
     var timestamp: Timestamp = Timestamp.now()
 
 
