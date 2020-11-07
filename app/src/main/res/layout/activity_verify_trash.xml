@@ -4,6 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_background"
     tools:context=".VerifyTrashActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/activity_first_verify_trash_imageViewId"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="28dp" />
+
+        <ImageView
+            android:id="@+id/activity_second_verify_trash_imageViewId"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="164dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/activity_deny_verify_trash_btnSendId"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:drawableLeft="@drawable/ic_deny"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:textColor="#353535"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/activity_confirm_verify_trash_btnSendId"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/activity_confirm_verify_trash_btnSendId"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="100dp"
+                android:drawableLeft="@drawable/ic_confirm"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:textColor="#353535"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.495" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
