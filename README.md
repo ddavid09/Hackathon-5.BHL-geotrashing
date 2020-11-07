@@ -1,7 +1,7 @@
 # geotrashing
 ## description
 An application developed by students of the Hackathon Best Hacking League (BHL). 
-The application was created to motivate people to take care of our planet together through a ranking social game of cleansing our mother earth. The game consists in placing markers on the map in places of illegal landfill sites. Other participants of the game can locate the marked sites and decide which ones they want to clean. Verification of cleaned places is also carried out by users of the application. For each activity performed in the application, the user gains points, which can be exchanged for prizes. 
+The application was created to motivate people to take care of our planet together through a ranking social game of cleaning our mother earth. The game consists in placing markers on the map in places of illegal landfill sites. Other participants of the game can locate the marked sites and decide which ones they want to clean. Verification of cleaned places is also carried out by users of the application. For each activity performed in the application, the user gains points, which can be exchanged for prizes. 
 Show which stake you can clean today.
 
 ![alt text](https://media.publit.io/file/123904070_721460475129094_573875072253268655_n-k.png)
