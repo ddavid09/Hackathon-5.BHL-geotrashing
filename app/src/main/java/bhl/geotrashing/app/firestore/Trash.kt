@@ -14,8 +14,6 @@ data class Trash(
     var collected: Boolean = false,
     var confirmed: Boolean = false,
     var timestamp: Timestamp = Timestamp.now()
-
-
 )
 
 
