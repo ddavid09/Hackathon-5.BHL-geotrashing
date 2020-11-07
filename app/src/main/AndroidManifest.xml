@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Geotrashing">
-        <activity android:name=".cleantrashactivities.PrizeTrashActivity"></activity>
+        <activity android:name=".LoadingActivity"></activity>
+        <activity android:name=".cleantrashactivities.PrizeTrashActivity" />
         <activity android:name=".cleantrashactivities.ConfirmTrashActivity" />
         <activity android:name=".cleantrashactivities.ChooseTrashActivity" />
         <activity android:name=".firestore.TestActivity">

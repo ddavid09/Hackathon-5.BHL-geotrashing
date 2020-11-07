@@ -1,6 +1,7 @@
 package bhl.geotrashing.app.firestore
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
@@ -8,9 +9,13 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import bhl.geotrashing.app.LoadingActivity
+import bhl.geotrashing.app.MainActivity
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -24,18 +29,15 @@ class DataBase(val contex: Context) {
     val TAG = "DataBase"
     val storage: FirebaseStorage = FirebaseStorage.getInstance()
 
-    fun uploadTrash(
-        location: LatLng,
-        description: String,
-        bitmap: Bitmap
-    ) {
-
+    fun uploadTrash( location: LatLng,description: String, bitmap: Bitmap): Task<Void> {
+        val loadingIntent = Intent(contex, LoadingActivity::class.java)
+        val startIntent = Intent(contex, MainActivity::class.java)
         val locationGeoPoint = GeoPoint(location.latitude, location.longitude)
         val storageRef = storage.reference
-
         val ref = db.collection("trash").document()
         val trash = Trash(locationGeoPoint, user?.uid!!, description, ref.id)
-        ref.set(trash)
+        contex.startActivity(loadingIntent)
+        return ref.set(trash)
             .addOnSuccessListener {
                 Log.d(TAG, "DocumentSnapshot added with ID: ${ref.id}")
                 val pictureRef = storageRef.child("trash/" + ref.id + ".jpg")
@@ -43,9 +45,8 @@ class DataBase(val contex: Context) {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                 val data = baos.toByteArray()
                 var uploadTask = pictureRef.putBytes(data)
-                uploadTask.addOnFailureListener {
-                    // Handle unsuccessful uploads
-                }.addOnSuccessListener { documentReference ->
+                uploadTask.addOnSuccessListener { documentReference ->
+                    contex.startActivity(startIntent)
                     Log.d(TAG, "Picture send")
                     val toast = Toast.makeText(
                         this.contex,
@@ -54,6 +55,7 @@ class DataBase(val contex: Context) {
                     )
                     toast.show()
                 }.addOnFailureListener { e ->
+                    contex.startActivity(startIntent)
                     Log.w(TAG, "Error sending picture", e)
                     val toast = Toast.makeText(
                         this.contex,

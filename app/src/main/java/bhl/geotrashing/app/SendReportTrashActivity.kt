@@ -26,8 +26,12 @@ class SendReportTrashActivity : AppCompatActivity() {
         val description = activity_send_report_trash_descriptionId.text
 
         activity_send_report_trash_btnSendId.setOnClickListener {
-            db.uploadTrash(location,description.toString() ,decodedTakenImage)
+
+            db.uploadTrash(location, description.toString(), decodedTakenImage).addOnSuccessListener {
+
+            }
         }
+
     }
 
 }
