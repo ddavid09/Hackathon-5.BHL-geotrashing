@@ -27,9 +27,7 @@ class SendReportTrashActivity : AppCompatActivity() {
 
         activity_send_report_trash_btnSendId.setOnClickListener {
 
-            db.uploadTrash(location, description.toString(), decodedTakenImage).addOnSuccessListener {
-
-            }
+            db.uploadTrash(location, description.toString(), decodedTakenImage)
         }
 
     }
