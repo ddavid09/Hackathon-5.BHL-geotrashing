@@ -1,6 +1,7 @@
 package bhl.geotrashing.app.cleantrashactivities
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +35,7 @@ class CleanTrashActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clean_trash)
+        val intentToNextActivity = Intent(this, ChooseTrashActivity::class.java)
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -42,7 +44,7 @@ class CleanTrashActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         btnChoseMarker.setOnClickListener {
             if(markerChosen)
             {
-
+                startActivity(intentToNextActivity)
             }
             else
             {
