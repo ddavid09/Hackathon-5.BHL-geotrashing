@@ -166,6 +166,7 @@ class DataBase(val contex: Context) {
     fun confirmTrashCollecting(trash: Trash){
         val storageRef = storage.reference
         trash.confirmed=true
+        trash.confirmatorID= user!!.uid
         db.collection("trash").document(trash.ID).set(trash)
             .addOnSuccessListener {
                 Log.d(TAG, "DocumentSnapshot added with ID: ${trash.ID}")
@@ -216,7 +217,21 @@ class DataBase(val contex: Context) {
             .whereEqualTo("confirmed",true)
             .addSnapshotListener{
                     value, error ->
-                mutableLiveData.value!![user.userID]!!.points++
+                mutableLiveData.value!![user.userID]!!.points+=1000
+            }
+        db.collection("trash")
+            .whereEqualTo("confirmatorID",user.userID)
+            .whereEqualTo("collected",true)
+            .whereEqualTo("confirmed",true)
+            .addSnapshotListener{
+                    value, error ->
+                mutableLiveData.value!![user.userID]!!.points+=100
+            }
+        db.collection("trash")
+            .whereEqualTo("creatorID",user.userID)
+            .addSnapshotListener{
+                    value, error ->
+                mutableLiveData.value!![user.userID]!!.points+=100
             }
     }
 
