@@ -10,11 +10,16 @@
         android:id="@+id/btnTakePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="568dp"
-        android:text="Take Picture"
+        android:text="Zrób zdjęcie"
+        android:textSize="20sp"
+        android:textColor="#353535"
+        android:drawableLeft="@drawable/ic_camera"
+        app:layout_constraintBottom_toBottomOf="@+id/report_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95
+" />
 
     <fragment
         android:id="@+id/report_map"
@@ -23,7 +28,7 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".cleantrashactivities.CleanTrashActivity"
-        tools:layout_editor_absoluteX="-42dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

@@ -36,8 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ConfirmTrashActivityButtonTakePictureId"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:layout_constraintTop_toBottomOf="@+id/ConfirmTrashActivityButtonTakePictureId" />
 
     <Button
         android:id="@+id/ConfirmTrashActivityButtonConfrimId"

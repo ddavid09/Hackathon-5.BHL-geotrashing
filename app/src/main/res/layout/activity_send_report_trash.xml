@@ -4,41 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_background"
     tools:context=".SendReportTrashActivity">
+
 
     <ImageView
         android:id="@+id/activity_send_report_trash_imageViewId"
-        android:layout_width="402dp"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
         android:layout_height="317dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/activity_send_report_trash_btnSendId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_send"
+        android:text="Wyślij \nzgłoszenie"
+        android:textColor="#353535"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/activity_send_report_trash_btnSend"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="335dp"
-        android:layout_height="144dp"
-        app:layout_constraintBottom_toTopOf="@+id/activity_send_report_trash_btnSendId"
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/activity_send_report_trash_descriptionId"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="170dp"
+        android:hint='Wprowadz opis zgłoszonego miejsca \nnp. \"odpady budowlane, typu pojemniki po farbach...\"'
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_send_report_trash_imageViewId"
-        app:layout_constraintVertical_bias="0.132">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/activity_send_report_trash_descriptionId"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/hint" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivty">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="338dp"
+        android:layout_height="541dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_geotrashing_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
