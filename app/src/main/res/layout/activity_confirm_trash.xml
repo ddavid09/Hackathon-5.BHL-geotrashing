@@ -6,4 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".cleantrashactivities.ConfirmTrashActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:text="GRATULACJE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/ConfirmTrashActivityButtonTakePictureId"
+        android:layout_width="258dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="36dp"
+        android:text="Zrób zdjęcie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageView
+        android:id="@+id/ConfirmTrashActivityImageViewId"
+        android:layout_width="match_parent"
+        android:layout_height="189dp"
+        android:layout_marginTop="108dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ConfirmTrashActivityButtonTakePictureId"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <Button
+        android:id="@+id/ConfirmTrashActivityButtonConfrimId"
+        android:layout_width="299dp"
+        android:layout_height="58dp"
+        android:text="ZATWIERDZ"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ConfirmTrashActivityImageViewId" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package bhl.geotrashing.app.cleantrashactivities
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
@@ -12,24 +13,35 @@ import kotlinx.android.synthetic.main.activity_choose_trash.*
 
 
 class ChooseTrashActivity : AppCompatActivity() {
+
+    lateinit var confirmTrashIntent: Intent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_trash)
+        confirmTrashIntent = Intent(this, ConfirmTrashActivity::class.java)
+
         val trash : Trash = Trash(ID = "2gwthHYXd7mCa4egwTvr", description = "sztywny opis")
+        val trashId = trash.ID
         val LDpicture = DataBase(this).getTrashPhoto(trash)
         ChooseTrashActivityTextViewId.setText(trash.description)
 
         LDpicture.observe(this, Observer {
             if (it != null) {
-                var bitmapdata: ByteArray// let this be your byte array
-                bitmapdata = it
-                val bitmap = BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.size)
-                ChooseTrashActivityImageViewId.setImageBitmap(bitmap)
+                //val bitmap = BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.size)
+                ChooseTrashActivityImageViewId.setImageBitmap(it)
+            } else{
+                Log.d("error", "error")
             }
-            Log.d("DUPA", "DUPA")
+
         })
+        ChooseTrashActivityButtonId.setOnClickListener {
+            confirmTrashIntent.putExtra("trashId", trashId)
+            startActivity(this.confirmTrashIntent)
+        }
 
 
     }
+
 
 }

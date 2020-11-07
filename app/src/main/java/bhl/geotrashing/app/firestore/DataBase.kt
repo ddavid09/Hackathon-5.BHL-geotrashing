@@ -3,19 +3,17 @@ package bhl.geotrashing.app.firestore
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.text.BoringLayout
-import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.maps.model.LatLng
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 
 class DataBase(val contex: Context) {
@@ -68,13 +66,13 @@ class DataBase(val contex: Context) {
             }
     }
 
-    fun getAllTrash(collected:Boolean, confirmed:Boolean): MutableLiveData<ArrayList<Trash>>  {
+    fun getAllTrash(collected: Boolean, confirmed: Boolean): MutableLiveData<ArrayList<Trash>>  {
         val liveDataTrashList: MutableLiveData<ArrayList<Trash>> = MutableLiveData()
         if(!collected && confirmed){
             Log.w(TAG, "ERROR ERROR ERROR ERROR ERROR ERROR")
         }
         db.collection("trash")
-            .whereEqualTo("collected", collected).whereEqualTo("confirmed",confirmed).addSnapshotListener { value, e ->
+            .whereEqualTo("collected", collected).whereEqualTo("confirmed", confirmed).addSnapshotListener { value, e ->
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
                     return@addSnapshotListener
@@ -91,19 +89,29 @@ class DataBase(val contex: Context) {
         return liveDataTrashList
     }
 
-    fun getTrashPhoto(trash: Trash,collected: Boolean = false): MutableLiveData<ByteArray> {
-        val liveByteArray: MutableLiveData<ByteArray> = MutableLiveData()
+    fun getTrashPhoto(trash: Trash, collected: Boolean = false): MutableLiveData<Bitmap> {
+        val liveBitmap: MutableLiveData<Bitmap> = MutableLiveData()
         val storageRef = storage.reference
-        var pictureRef = storageRef.child("trash/" + trash.ID + ".jpg")
-        if (collected) pictureRef = storageRef.child("collected_trash/" + trash.ID + ".jpg")
-        val ONE_MEGABYTE: Long = 1024 * 1024
-        pictureRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-            liveByteArray.value = it
+
+
+
+        var pictureRef = storageRef.child("trash/"+ trash.ID + ".jpg")
+        if(collected) pictureRef = storageRef.child("collected_trash/" + trash.ID + ".jpg")
+
+
+        val localFile = File.createTempFile("images", "jpg")
+
+        pictureRef.getFile(localFile).addOnSuccessListener {
+            liveBitmap.value = BitmapFactory.decodeFile(localFile.absolutePath)
+            // Local temp file has been created
         }.addOnFailureListener {
             // Handle any errors
         }
-        return liveByteArray
+        return liveBitmap
     }
+
+
+
 
     fun uploadTrashCollecting(bitmap: Bitmap, trash: Trash){
         val storageRef = storage.reference
