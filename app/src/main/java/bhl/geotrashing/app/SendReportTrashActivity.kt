@@ -16,7 +16,7 @@ class SendReportTrashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_send_report_trash)
-        val intent : Intent = getIntent()
+        val intent: Intent = getIntent()
         val takenImage = intent.getStringExtra("path")
         val decodedTakenImage = BitmapFactory.decodeFile(takenImage)
         val db = DataBase(this)
@@ -25,13 +25,20 @@ class SendReportTrashActivity : AppCompatActivity() {
         activity_send_report_trash_imageViewId.setImageBitmap(decodedTakenImage)
         val description = activity_send_report_trash_descriptionId.text
 
-        activity_send_report_trash_btnSendId.setOnClickListener {
-
-            db.uploadTrash(location, description.toString(), decodedTakenImage).addOnSuccessListener {
-
+        topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.send -> {
+                    db.uploadTrash(location, description.toString(), decodedTakenImage)
+                    true
+                }
+                else -> false
             }
+
+        }
+
+        topAppBar.setNavigationOnClickListener {
+            super.finish()
         }
 
     }
-
 }

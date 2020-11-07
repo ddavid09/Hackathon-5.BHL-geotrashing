@@ -21,11 +21,6 @@
         <activity android:name=".cleantrashactivities.PrizeTrashActivity" />
         <activity android:name=".cleantrashactivities.ConfirmTrashActivity" />
         <activity android:name=".cleantrashactivities.ChooseTrashActivity" />
-        <activity android:name=".firestore.TestActivity">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -41,7 +36,10 @@
         <activity android:name=".RankingActivity" />
         <activity android:name=".ReportTrashActivity" />
         <activity android:name=".cleantrashactivities.CleanTrashActivity" />
-        <activity android:name=".SendReportTrashActivity" />
+
+        <activity android:name=".SendReportTrashActivity"
+            android:theme="@style/Theme.Geotrashing.Sendingphoto"
+            android:label="Prześlij zgłoszenie"/>
         <activity android:name=".MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
