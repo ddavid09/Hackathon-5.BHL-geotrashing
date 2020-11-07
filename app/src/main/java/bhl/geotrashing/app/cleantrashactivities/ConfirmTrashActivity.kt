@@ -16,9 +16,11 @@ import bhl.geotrashing.app.R
 import bhl.geotrashing.app.ReportTrashActivity
 import bhl.geotrashing.app.firestore.DataBase
 import bhl.geotrashing.app.firestore.Trash
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_choose_trash.*
 import kotlinx.android.synthetic.main.activity_confirm_trash.*
 import kotlinx.android.synthetic.main.activity_report_trash.*
+import kotlinx.android.synthetic.main.activity_send_report_trash.*
 import java.io.File
 
 private const val FILE_NAME = "photo2.jpg"
@@ -28,15 +30,22 @@ private lateinit var photoFile: File
 class ConfirmTrashActivity : AppCompatActivity() {
 
     lateinit var prizeTrashActivity: Intent
+    lateinit var location: LatLng
+    lateinit var path : String
+    var btnClickable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_trash)
         prizeTrashActivity = Intent(this, PrizeTrashActivity::class.java)
+        val db = DataBase(this)
 
         val intent : Intent = getIntent()
         val trashId = intent.getStringExtra("trashId")
         val trash : Trash = Trash(ID = trashId)
+        val description = trash.description
+        location = LatLng(trash.locationGeoPoint.latitude,trash.locationGeoPoint.longitude)
+
 
         ConfirmTrashActivityButtonTakePictureId.setOnClickListener {
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -52,16 +61,29 @@ class ConfirmTrashActivity : AppCompatActivity() {
                 Toast.makeText(this,"Nie można otworzyć aparatu", Toast.LENGTH_SHORT).show()
             }
         }
+
+
         ConfirmTrashActivityButtonConfrimId.setOnClickListener {
-            prizeTrashActivity.putExtra("trashId", trashId)
-            startActivity(this.prizeTrashActivity)
+            if (btnClickable){
+
+                val decodedTakenImage = BitmapFactory.decodeFile(path)
+                db.uploadTrash(location,description.toString() ,decodedTakenImage)
+                prizeTrashActivity.putExtra("trashId", trashId)
+                startActivity(this.prizeTrashActivity)
+            }else
+            {
+                Toast.makeText(this, "Najpierw zrób zdjęcie!", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
-        if(requestCode == REQUEST_CODE && resultCode ==Activity.RESULT_OK){
+        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             //val takenImage = data?.extras?.get("data") as Bitmap
+            path = photoFile.absolutePath
             val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
             ConfirmTrashActivityImageViewId.setImageBitmap(takenImage)
+            btnClickable = true
         }else{
             super.onActivityResult(requestCode, resultCode, data)
         }
