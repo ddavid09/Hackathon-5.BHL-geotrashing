@@ -6,16 +6,12 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import bhl.geotrashing.app.LoadingActivity
 import bhl.geotrashing.app.MainActivity
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.GeoPoint
-import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -167,7 +163,7 @@ class DataBase(val contex: Context) {
 
     }
 
-    fun confirmTrashCollecting(trash:Trash){
+    fun confirmTrashCollecting(trash: Trash){
         val storageRef = storage.reference
         trash.confirmed=true
         db.collection("trash").document(trash.ID).set(trash)
@@ -258,7 +254,7 @@ class DataBase(val contex: Context) {
         return MLDTrash
     }
 
-    fun unconfirmTrashCollecting(trash:Trash){
+    fun unconfirmTrashCollecting(trash: Trash){
         val storageRef = storage.reference
         trash.collected=false
         db.collection("trash").document(trash.ID).set(trash)

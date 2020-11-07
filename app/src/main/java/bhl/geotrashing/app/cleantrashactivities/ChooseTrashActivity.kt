@@ -1,7 +1,6 @@
 package bhl.geotrashing.app.cleantrashactivities
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -9,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import bhl.geotrashing.app.R
 import bhl.geotrashing.app.firestore.DataBase
-import bhl.geotrashing.app.firestore.Trash
-import com.google.type.LatLng
 import kotlinx.android.synthetic.main.activity_choose_trash.*
 
 

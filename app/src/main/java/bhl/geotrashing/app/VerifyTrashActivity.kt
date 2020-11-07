@@ -3,7 +3,6 @@ package bhl.geotrashing.app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -16,32 +15,42 @@ class VerifyTrashActivity : AppCompatActivity() {
     private var firstReady = false
     private var secondReady = false
     private var ready = false
+    private lateinit var trash: Trash
 
     override fun onCreate(savedInstanceState: Bundle?) {
         verifyTrashIntent = Intent(this, VerifyTrashActivity::class.java)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verify_trash)
 
-        val trash = Trash(ID = "6FZrURjFfPLbq7JxHpWv", description = "sztywny opis")
-        val picture = DataBase(this).getTrashPhoto(trash, false)
-        val picture2 = DataBase(this).getTrashPhoto(trash, true)
+        val trashMl = DataBase(this).getTrashToConfirm()
 
-        picture.observe(this, Observer {
-            if (it != null) {
-                activity_first_verify_trash_imageViewId.setImageBitmap(it)
-                firstReady = true
-                checkReady()
-            } else{
-                Log.d("error", "error")
+        trashMl.observe(this, Observer { it ->
+            if(it != null){
+                val picture = DataBase(this).getTrashPhoto(it, false)
+                val picture2 = DataBase(this).getTrashPhoto(it, true)
+                trash = it
+                picture.observe(this, Observer {it2 ->
+                    if (it2 != null) {
+                        activity_first_verify_trash_imageViewId.setImageBitmap(it2)
+                        firstReady = true
+                        checkReady()
+                    } else{
+                        Log.d("error", "error")
+                    }
+                })
+
+                picture2.observe(this, Observer {it2 ->
+                    if (it2 != null) {
+                        activity_second_verify_trash_imageViewId.setImageBitmap(it2)
+                        secondReady = true
+                        checkReady()
+                    } else{
+                        Log.d("error", "error")
+                    }
+                })
             }
-        })
-
-        picture2.observe(this, Observer {
-            if (it != null) {
-                activity_second_verify_trash_imageViewId.setImageBitmap(it)
-                secondReady = true
-                checkReady()
-            } else{
+            else{
+                Toast.makeText(this, "Potwierdzono wszystkie przypadki", Toast.LENGTH_LONG).show()
                 Log.d("error", "error")
             }
         })
