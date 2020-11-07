@@ -28,7 +28,7 @@ class DataBase(val contex: Context) {
     val TAG = "DataBase"
     val storage: FirebaseStorage = FirebaseStorage.getInstance()
 
-    fun uploadTrash( location: LatLng,description: String, bitmap: Bitmap): Task<Void> {
+    fun uploadTrash( location: LatLng,description: String, bitmap: Bitmap) {
         val loadingIntent = Intent(contex, LoadingActivity::class.java)
         val startIntent = Intent(contex, MainActivity::class.java)
         val locationGeoPoint = GeoPoint(location.latitude, location.longitude)
@@ -36,7 +36,7 @@ class DataBase(val contex: Context) {
         val ref = db.collection("trash").document()
         val trash = Trash(locationGeoPoint, user?.uid!!, description, ref.id)
         contex.startActivity(loadingIntent)
-        return ref.set(trash)
+        ref.set(trash)
             .addOnSuccessListener {
                 Log.d(TAG, "DocumentSnapshot added with ID: ${ref.id}")
                 val pictureRef = storageRef.child("trash/" + ref.id + ".jpg")
@@ -173,19 +173,19 @@ class DataBase(val contex: Context) {
         db.collection("trash").document(trash.ID).set(trash)
             .addOnSuccessListener {
                 Log.d(TAG, "DocumentSnapshot added with ID: ${trash.ID}")
-                Toast.makeText(
-                    this.contex,
-                    "Poprawnie potwierdzono zebranie smieci",
-                    Toast.LENGTH_SHORT
-                ).show()
+//                Toast.makeText(
+//                    this.contex,
+//                    "Poprawnie potwierdzono zebranie smieci",
+//                    Toast.LENGTH_SHORT
+//                ).show()
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-                Toast.makeText(
-                    this.contex,
-                    "Błąd w potwierdzaniu zebrania smieci",
-                    Toast.LENGTH_SHORT
-                ).show()
+//                Log.w(TAG, "Error adding document", e)
+//                Toast.makeText(
+//                    this.contex,
+//                    "Błąd w potwierdzaniu zebrania smieci",
+//                    Toast.LENGTH_SHORT
+//                ).show()
             }
 
     }
@@ -195,20 +195,20 @@ class DataBase(val contex: Context) {
             val userData = User(it,nickname)
             db.collection("users").document(it).set(userData)
                 .addOnSuccessListener {
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${it}")
-                    Toast.makeText(
-                        this.contex,
-                        "Poprawnie dodano nick użytkownika",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Log.d(TAG, "Poprawnie dodano nick użytkownika: ${it}")
+//                    Toast.makeText(
+//                        this.contex,
+//                        "Poprawnie dodano nick użytkownika",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 }
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error adding document", e)
-                    Toast.makeText(
-                        this.contex,
-                        "Błąd w dodawaniu nicka użytkownika",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        this.contex,
+//                        "Błąd w dodawaniu nicka użytkownika",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 }
         }
     }
@@ -240,8 +240,50 @@ class DataBase(val contex: Context) {
             }
         }
         return ranking
+    }
+
+    fun getTrashToConfirm(): MutableLiveData<Trash> {
+        val MLDTrash:MutableLiveData<Trash> = MutableLiveData<Trash>()
+        db.collection("trash")
+            .whereEqualTo("collected", true).whereEqualTo("confirmed",false).addSnapshotListener { value, e ->
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e)
+                    return@addSnapshotListener
+                }
+                for (doc in value!!) {
+                    MLDTrash.value=doc.toObject(Trash::class.java)
+                    break
+                }
+            }
+        return MLDTrash
+    }
+
+    fun unconfirmTrashCollecting(trash:Trash){
+        val storageRef = storage.reference
+        trash.collected=false
+        db.collection("trash").document(trash.ID).set(trash)
+            .addOnSuccessListener {
+                Log.d(TAG, "DocumentSnapshot added with ID: ${trash.ID}")
+//                Toast.makeText(
+//                    this.contex,
+//                    "Poprawnie potwierdzono zebranie smieci",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+//                Toast.makeText(
+//                    this.contex,
+//                    "Błąd w potwierdzaniu zebrania smieci",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+            }
 
     }
+
+
+
+
 
 
 
