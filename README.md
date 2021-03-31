@@ -1,4 +1,7 @@
 # geotrashing
+## video presentation
+[![GEOTRASHING](https://img.youtube.com/vi/j6Ufw7A8OUE/0.jpg)](https://youtu.be/j6Ufw7A8OUE "GEOTRASHING")
+
 ## description
 An application developed by students of the Hackathon Best Hacking League (BHL). 
 The application was created to motivate people to take care of our planet together through a ranking social game of cleaning our mother earth. The game consists in placing markers on the map in places of illegal landfill sites. Other participants of the game can locate the marked sites and decide which ones they want to clean. Verification of cleaned places is also carried out by users of the application. For each activity performed in the application, the user gains points, which can be exchanged for prizes. 
