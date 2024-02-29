@@ -17,8 +17,6 @@ Certainly, a large amount of this waste found its place in illegal waste dumps.
 The actions of cleaning up the world and the like are extremely important in today's world, but unfortunately they are not enough. 
 The application aims to encourage more frequent cleaning of the world through competition. 
 
-<img src="https://www.rp.pl/apps/pbcsi.dll/storyimage/RP/20190212/PCD/302129894/AR/0/AR-302129894.jpg?imageversion=Artykul&lastModified=" width="40%">
-
 ## functionalities
 * reporting of illegal landfill sites
 * cleaning of the reported locations
