@@ -7,7 +7,7 @@ Show which stake you can clean today.
 ![alt text](https://media.publit.io/file/123904070_721460475129094_573875072253268655_n-k.png)
 ## developers
 *   [Piotr Zdun](https://github.com/ddavid09 "Git")
-*   [Adrian Malik](https://github.com/h4dri "Git")
+*   [Adrian Malik](https://github.com/Madrianoliko "Git")
 *   [Dominik Dawidziak](https://github.com/zdunke "Git")
 *   [Norbert Waszkowiak](https://github.com/kajkitsu "Git")
 
